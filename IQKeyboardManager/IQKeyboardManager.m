@@ -1884,14 +1884,12 @@ NS_EXTENSION_UNAVAILABLE_IOS("Unavailable in extension")
         //Resigning first responder
         BOOL isResignFirstResponder = [textFieldView resignFirstResponder];
         
-        //  If it refuses then becoming it as first responder again.    (Bug ID: #96)
-        if (isResignFirstResponder == NO)
-        {
-            //If it refuses to resign then becoming it first responder again for getting notifications callback.
-            [textFieldRetain becomeFirstResponder];
-            
-            [self showLog:[NSString stringWithFormat:@"Refuses to Resign first responder: %@",textFieldView]];
-        }
+        // This used to become first responder again (Bug ID: #96)
+        // But this is causing issues with our app re-rendering again and again in a loop so we're removing it.
+        // if (isResignFirstResponder == NO)
+        // {
+            // [textFieldRetain becomeFirstResponder];
+        // }
         
         return isResignFirstResponder;
     }

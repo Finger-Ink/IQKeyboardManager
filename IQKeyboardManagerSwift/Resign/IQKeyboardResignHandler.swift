@@ -86,10 +86,9 @@ import IQTextInputViewNotification
 
         // Resigning first responder
         guard textInputView.resignFirstResponder() else {
-//            showLog("Refuses to resign first responder: \(textInputView)")
-            //  If it refuses then becoming it as first responder again.    (Bug ID: #96)
-            // If it refuses to resign then becoming it first responder again for getting notifications callback.
-            textInputView.becomeFirstResponder()
+            // This used to become first responder again (Bug ID: #96)
+            // But this is causing issues with our app re-rendering again and again in a loop so we're removing it.
+            // textInputView.becomeFirstResponder()
             return false
         }
         return true
